@@ -1,0 +1,3 @@
+com\example\quicknotes\service\NoteServiceTest.class
+com\example\quicknotes\model\NoteTest.class
+com\example\quicknotes\controller\NoteControllerTest.class
