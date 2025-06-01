@@ -11,4 +11,13 @@ A simple full-stack note-taking app built with:
 
 **Backend**:
 ```bash
-./mvnw spring-boot:run
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+**Frontend**:
+```bash
+cd frontend
+npm install     # (only once, to install dependencies)
+npm run dev     # start the Vite dev server at http://localhost:3000
+```
