@@ -1,0 +1,14 @@
+# Java
+target/
+*.class
+*.jar
+*.log
+*.war
+*.iml
+.gradle
+.idea/
+
+# Node/Vite
+node_modules/
+dist/
+.env
