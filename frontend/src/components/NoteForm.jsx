@@ -18,7 +18,6 @@ export default function NoteForm({ onSubmit }) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
-        className="border p-2 mr-2"
         required
       />
       <input
@@ -26,10 +25,9 @@ export default function NoteForm({ onSubmit }) {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="Content"
-        className="border p-2 mr-2"
         required
       />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+      <button type="submit">
         Add Note
       </button>
     </form>

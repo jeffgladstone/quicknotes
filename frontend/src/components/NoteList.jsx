@@ -20,37 +20,29 @@ export default function NoteList({ notes, onUpdate, onDelete }) {
   return (
     <div>
       {notes.map((note) => (
-        <div key={note.id} className="border p-3 mb-2">
+        <div key={note.id}>
           {editId === note.id ? (
-            <form onSubmit={submitEdit} className="mb-2">
+            <form onSubmit={submitEdit}>
               <input
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
-                className="border p-1 mr-2"
               />
               <input
                 value={editContent}
                 onChange={(e) => setEditContent(e.target.value)}
-                className="border p-1 mr-2"
               />
-              <button type="submit" className="bg-green-500 text-white px-2 py-1 rounded">
+              <button type="submit">
                 Save
               </button>
             </form>
           ) : (
             <>
-              <h2 className="font-semibold">{note.title}</h2>
+              <h2>{note.title}</h2>
               <p>{note.content}</p>
-              <button
-                onClick={() => startEdit(note)}
-                className="text-blue-500 mr-2"
-              >
+              <button onClick={() => startEdit(note)}>
                 Edit
               </button>
-              <button
-                onClick={() => onDelete(note.id)}
-                className="text-red-500"
-              >
+              <button onClick={() => onDelete(note.id)}>
                 Delete
               </button>
             </>

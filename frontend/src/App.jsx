@@ -5,15 +5,15 @@ import noteService from "./services/noteService";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
+  
+    useEffect(() => {
+      fetchNotes();
+    }, []);
 
   const fetchNotes = async () => {
     const res = await noteService.getAll();
     setNotes(res);
   };
-
-  useEffect(() => {
-    fetchNotes();
-  }, []);
 
   const handleCreate = async (note) => {
     await noteService.create(note);
@@ -31,8 +31,8 @@ export default function App() {
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">QuickNotes</h1>
+    <div>
+      <h1>QuickNotes</h1>
       <NoteForm onSubmit={handleCreate} />
       <NoteList notes={notes} onUpdate={handleUpdate} onDelete={handleDelete} />
     </div>
