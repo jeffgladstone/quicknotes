@@ -18,7 +18,7 @@ public class User {
 
     private String username;
 
-    private String hashedPassword;
+    private String password;
 
     private LocalDateTime createdAt;
 }

@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,7 @@ public class NoteServiceTest {
                 .content("This is a test note")
                 .createdAt(LocalDateTime.now())
                 .build();
-        when(noteRepository.findAll()).thenReturn(Collections.singletonList(note));
+        when(noteRepository.findAll()).thenReturn(List.of(note));
 
         List<Note> result = noteService.getAllNotes();
 
