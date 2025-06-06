@@ -36,7 +36,9 @@ public class NoteService {
     }
 
     public void deleteNote(Long id) {
-        repository.deleteById(id);
+        Note note = repository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Note not found"));
+        repository.delete(note);
     }
 
 }

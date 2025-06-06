@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -39,7 +38,7 @@ public class NoteControllerTest {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        when(noteService.getAllNotes()).thenReturn(Collections.singletonList(note));
+        when(noteService.getAllNotes()).thenReturn(List.of(note));
 
         mockMvc.perform(get("/api/notes"))
                 .andExpect(status().isOk())
@@ -59,32 +58,32 @@ public class NoteControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(note)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("New Note"));
+                .andExpect(jsonPath("$.title").value("New Note"))
+                .andExpect(jsonPath("$.content").value("Content"));
     }
 
     @Test
     public void testUpdateNote() throws Exception {
-        UUID id = UUID.randomUUID();
         Note updated = Note.builder().title("Updated").content("Updated Content").build();
 
-        when(noteService.updateNote(eq(id), any(Note.class))).thenReturn(updated);
+        when(noteService.updateNote(eq(1L), any(Note.class))).thenReturn(updated);
 
-        mockMvc.perform(put("/api/notes/{id}", id)
+        mockMvc.perform(put("/api/notes/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updated)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Updated"));
+                .andExpect(jsonPath("$.title").value("Updated"))
+                .andExpect(jsonPath("$.content").value("Updated Content"));
     }
 
     @Test
     public void testDeleteNote() throws Exception {
-        UUID id = UUID.randomUUID();
-        doNothing().when(noteService).deleteNote(id);
+        doNothing().when(noteService).deleteNote(1L);
 
-        mockMvc.perform(delete("/api/notes/{id}", id))
+        mockMvc.perform(delete("/api/notes/{id}", 1L))
                 .andExpect(status().isOk());
 
-        verify(noteService, times(1)).deleteNote(id);
+        verify(noteService, times(1)).deleteNote(1L);
     }
 
 }

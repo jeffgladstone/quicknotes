@@ -11,17 +11,16 @@ public class NoteTest {
 
     @Test
     public void testNoteBuilderAndGetters() {
-        UUID id = UUID.randomUUID();
         LocalDateTime timestamp = LocalDateTime.now();
 
         Note note = Note.builder()
-                .id(id)
+                .id(1L)
                 .title("Test Title")
                 .content("Test Content")
                 .createdAt(timestamp)
                 .build();
 
-        assertEquals(id, note.getId());
+        assertEquals(1L, note.getId());
         assertEquals("Test Title", note.getTitle());
         assertEquals("Test Content", note.getContent());
         assertEquals(timestamp, note.getCreatedAt());
@@ -30,15 +29,14 @@ public class NoteTest {
     @Test
     public void testNoteSetters() {
         Note note = new Note();
-        UUID id = UUID.randomUUID();
         LocalDateTime timestamp = LocalDateTime.now();
 
-        note.setId(id);
+        note.setId(1L);
         note.setTitle("Setter Title");
         note.setContent("Setter Content");
         note.setCreatedAt(timestamp);
 
-        assertEquals(id, note.getId());
+        assertEquals(1L, note.getId());
         assertEquals("Setter Title", note.getTitle());
         assertEquals("Setter Content", note.getContent());
         assertEquals(timestamp, note.getCreatedAt());
@@ -46,11 +44,10 @@ public class NoteTest {
 
     @Test
     public void testNoteEqualsAndHashCode() {
-        UUID id = UUID.randomUUID();
         LocalDateTime timestamp = LocalDateTime.now();
 
-        Note note1 = new Note(id, "Title", "Content", timestamp);
-        Note note2 = new Note(id, "Title", "Content", timestamp);
+        Note note1 = new Note(1L, "Title", "Content", timestamp);
+        Note note2 = new Note(1L, "Title", "Content", timestamp);
 
         assertEquals(note1, note2);
         assertEquals(note1.hashCode(), note2.hashCode());

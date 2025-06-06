@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -61,9 +60,8 @@ public class NoteServiceTest {
 
     @Test
     public void testUpdateNote() {
-        UUID id = UUID.randomUUID();
         Note existing = Note.builder()
-                .id(id)
+                .id(1L)
                 .title("Old Title")
                 .content("Old Content")
                 .createdAt(LocalDateTime.now())
@@ -74,10 +72,10 @@ public class NoteServiceTest {
                 .content("New Content")
                 .build();
 
-        when(noteRepository.findById(id)).thenReturn(Optional.of(existing));
+        when(noteRepository.findById(1L)).thenReturn(Optional.of(existing));
         when(noteRepository.save(any(Note.class))).thenAnswer(i -> i.getArgument(0));
 
-        Note result = noteService.updateNote(id, updated);
+        Note result = noteService.updateNote(1L, updated);
 
         assertEquals("New Title", result.getTitle());
         assertEquals("New Content", result.getContent());
@@ -85,12 +83,20 @@ public class NoteServiceTest {
 
     @Test
     public void testDeleteNote() {
-        UUID id = UUID.randomUUID();
-        doNothing().when(noteRepository).deleteById(id);
+        Note note = Note.builder()
+                .id(1L)
+                .title("Title")
+                .content("Content")
+                .createdAt(LocalDateTime.now())
+                .build();
 
-        noteService.deleteNote(id);
+        when(noteRepository.findById(eq(1L))).thenReturn(Optional.of(note));
+        doNothing().when(noteRepository).deleteById(1L);
 
-        verify(noteRepository, times(1)).deleteById(id);
+        noteService.deleteNote(1L);
+
+        verify(noteRepository, times(1)).delete(note);
+        verify(noteRepository, times(1)).findById(1L);
     }
 
 }
