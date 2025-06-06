@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.UUID;
 
 @Service
 public class NoteService {
@@ -26,7 +25,7 @@ public class NoteService {
         return repository.save(note);
     }
 
-    public Note updateNote(UUID id, Note updatedNote) {
+    public Note updateNote(Long id, Note updatedNote) {
         return repository.findById(id)
                 .map(existingNote -> {
                     existingNote.setTitle(updatedNote.getTitle());
@@ -36,7 +35,7 @@ public class NoteService {
                 .orElseThrow(() -> new NoSuchElementException("Note not found"));
     }
 
-    public void deleteNote(UUID id) {
+    public void deleteNote(Long id) {
         repository.deleteById(id);
     }
 

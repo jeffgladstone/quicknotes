@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/notes")
@@ -40,14 +39,14 @@ public class NoteController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update an existing note")
-    public Note update(@PathVariable UUID id, @RequestBody Note updatedNote) {
+    public Note update(@PathVariable Long id, @RequestBody Note updatedNote) {
         logger.info("Updating note with ID: {} and title: {}", id, updatedNote.getTitle());
         return service.updateNote(id, updatedNote);
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a note by ID")
-    public void delete(@PathVariable UUID id) {
+    public void delete(@PathVariable Long id) {
         logger.info("Deleting note with ID: {}", id);
         service.deleteNote(id);
     }

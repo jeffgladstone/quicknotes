@@ -8,8 +8,8 @@
 
     <changeSet id="1" author="jeffg">
         <createTable tableName="note">
-            <column name="id" type="UUID">
-                <constraints primaryKey="true" nullable="false"/>
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
             </column>
             <column name="title" type="VARCHAR(255)"/>
             <column name="content" type="CLOB"/>
