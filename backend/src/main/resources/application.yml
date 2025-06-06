@@ -18,10 +18,9 @@ spring:
     init:
       mode: always
       data-locations: classpath:data.sql
-      schema-locations: # skip schema.sql
 logging:
   level:
-    liquibase: INFO
+    liquibase: DEBUG
 
 springdoc:
   api-docs:

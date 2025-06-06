@@ -26,10 +26,12 @@ export default function NoteList({ notes, onUpdate, onDelete }) {
               <input
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
+                required
               />
               <input
                 value={editContent}
                 onChange={(e) => setEditContent(e.target.value)}
+                required
               />
               <button type="submit">
                 Save
